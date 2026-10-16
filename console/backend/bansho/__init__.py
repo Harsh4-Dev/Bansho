@@ -1,0 +1,1 @@
+"""Bansho console backend."""

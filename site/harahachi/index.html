@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#F3ECDA" />
+    <title>Harahachi 腹八分 — eat until you are eight-tenths full</title>
+    <meta name="description" content="A photo-first calorie & macro tracker, styled as a journey across an old Japanese map. Snap your dish, a vision model itemizes it, one hanko stamp logs it." />
+    <link rel="icon" href="/harahachi-icon.svg" type="image/svg+xml" />
+    <script type="module" src="/src/harahachi.ts"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <svg class="map" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+      <defs>
+        <pattern id="seigaiha" width="48" height="24" patternUnits="userSpaceOnUse">
+          <path d="M0 24a24 24 0 0 1 48 0M8 24a16 16 0 0 1 32 0M16 24a8 8 0 0 1 16 0" fill="none" stroke="#2D4A63" stroke-width="1" opacity="0.16" />
+          <path d="M-24 12a24 24 0 0 1 48 0M24 12a24 24 0 0 1 48 0" fill="none" stroke="#2D4A63" stroke-width="1" opacity="0.1" />
+        </pattern>
+        <filter id="paper">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" />
+          <feColorMatrix values="0 0 0 0 0.4  0 0 0 0 0.3  0 0 0 0 0.15  0 0 0 0.05 0" />
+        </filter>
+        <g id="peak">
+          <path d="M0 0 L22 -40 L44 0 Z" fill="#E9DFC6" stroke="#2B2A33" stroke-width="1.6" stroke-linejoin="round" />
+          <path d="M22 -40 L30 -25 L22 -28 L15 -26 Z" fill="#F3ECDA" stroke="#2B2A33" stroke-width="1" />
+          <path d="M22 -40 L22 0" stroke="#2B2A33" stroke-width="0.6" opacity="0.4" />
+        </g>
+        <g id="pine">
+          <path d="M0 0 L7 -18 L14 0 Z" fill="#7BA05B" stroke="#2B2A33" stroke-width="0.8" opacity="0.9" />
+          <path d="M7 0 L7 4" stroke="#2B2A33" stroke-width="1" />
+        </g>
+        <g id="blossom">
+          <circle r="5" fill="#E8A7B8" />
+          <circle cx="8" cy="3" r="4" fill="#E8A7B8" />
+          <circle cx="3" cy="-6" r="3.5" fill="#D96C8A" opacity="0.8" />
+        </g>
+      </defs>
+
+      <rect width="1200" height="800" fill="#E9DFC6" />
+      <rect width="1200" height="800" fill="url(#seigaiha)" />
+
+      <!-- the continent: nested coastal strokes, washi land -->
+      <path d="M140 210 C180 140 260 120 330 150 C360 110 430 95 480 130 C540 90 640 100 690 140 C760 105 850 110 900 160 C960 150 1030 190 1050 250 C1100 300 1090 380 1050 420 C1080 480 1060 560 1000 590 C980 650 900 690 830 670 C770 720 670 720 610 680 C540 720 440 715 390 670 C320 690 240 660 210 600 C150 580 110 510 130 450 C90 400 95 320 140 290 C115 260 120 230 140 210 Z" fill="none" stroke="#2B2A33" stroke-width="1" opacity="0.18" transform="translate(-10 -6) scale(1.02)" />
+      <path d="M140 210 C180 140 260 120 330 150 C360 110 430 95 480 130 C540 90 640 100 690 140 C760 105 850 110 900 160 C960 150 1030 190 1050 250 C1100 300 1090 380 1050 420 C1080 480 1060 560 1000 590 C980 650 900 690 830 670 C770 720 670 720 610 680 C540 720 440 715 390 670 C320 690 240 660 210 600 C150 580 110 510 130 450 C90 400 95 320 140 290 C115 260 120 230 140 210 Z" fill="#F3ECDA" stroke="#2B2A33" stroke-width="2" />
+
+      <!-- provinces -->
+      <path d="M220 260 C300 220 400 240 430 300 C450 380 380 430 300 420 C230 410 190 330 220 260 Z" fill="#E8A7B8" opacity="0.22" />
+      <path d="M700 420 C780 390 900 400 950 460 C980 530 900 600 800 590 C720 580 670 480 700 420 Z" fill="#7BA05B" opacity="0.16" />
+      <path d="M220 260 C300 220 400 240 430 300" fill="none" stroke="#2B2A33" stroke-dasharray="3 4" opacity="0.3" />
+      <path d="M700 420 C780 390 900 400 950 460 C980 530 900 600 800 590" fill="none" stroke="#2B2A33" stroke-dasharray="3 4" opacity="0.3" />
+
+      <!-- river -->
+      <path d="M560 160 C540 230 600 280 580 340 C560 410 620 460 600 530 C590 600 640 640 620 690" fill="none" stroke="#2D4A63" stroke-width="2" opacity="0.45" />
+
+      <!-- mountain ranges -->
+      <g>
+        <use href="#peak" x="420" y="220" /><use href="#peak" x="450" y="212" /><use href="#peak" x="480" y="226" />
+        <use href="#peak" x="760" y="250" /><use href="#peak" x="792" y="238" /><use href="#peak" x="825" y="252" /><use href="#peak" x="855" y="244" />
+        <use href="#peak" x="300" y="520" /><use href="#peak" x="332" y="510" />
+        <use href="#peak" x="880" y="360" /><use href="#peak" x="910" y="352" />
+        <use href="#peak" x="640" y="600" /><use href="#peak" x="672" y="592" /><use href="#peak" x="702" y="604" />
+      </g>
+
+      <!-- pine forests -->
+      <g>
+        <use href="#pine" x="250" y="330" /><use href="#pine" x="266" y="338" /><use href="#pine" x="282" y="328" /><use href="#pine" x="270" y="352" />
+        <use href="#pine" x="700" y="340" /><use href="#pine" x="716" y="350" /><use href="#pine" x="732" y="338" />
+        <use href="#pine" x="480" y="560" /><use href="#pine" x="496" y="570" /><use href="#pine" x="512" y="558" />
+        <use href="#pine" x="930" y="520" /><use href="#pine" x="946" y="530" />
+      </g>
+
+      <!-- the road between the stations, with the walked part in sakura -->
+      <path id="road" d="M220 420 C300 380 330 300 420 300 C500 300 520 380 600 390 C690 400 720 300 820 310 C900 318 930 420 900 480 C870 540 760 520 720 560 C690 590 610 600 560 580" fill="none" stroke="#2B2A33" stroke-width="2.4" stroke-dasharray="8 4" />
+      <path d="M220 420 C300 380 330 300 420 300 C500 300 520 380 600 390 C690 400 720 300 820 310" fill="none" stroke="#D96C8A" stroke-width="3.2" stroke-linecap="round" opacity="0.85" />
+      <path d="M420 300 C420 260 380 240 360 220" fill="none" stroke="#2B2A33" stroke-width="1.6" stroke-dasharray="6 4" opacity="0.6" />
+
+      <!-- station seals -->
+      <g font-family="Shippori Mincho, serif" font-weight="700" font-size="20" text-anchor="middle">
+        <g transform="translate(220 420)"><circle r="20" fill="#C73E3A" stroke="#C73E3A" stroke-width="3" /><text y="7" fill="#F3ECDA">本</text></g>
+        <g transform="translate(420 300)"><circle r="20" fill="#F3ECDA" stroke="#C73E3A" stroke-width="3" /><text y="7" fill="#2B2A33">茶</text></g>
+        <g transform="translate(600 390)"><circle r="20" fill="#F3ECDA" stroke="#C73E3A" stroke-width="3" /><text y="7" fill="#2B2A33">暦</text></g>
+        <g transform="translate(820 310)"><circle r="20" fill="#F3ECDA" stroke="#C73E3A" stroke-width="3" /><text y="7" fill="#2B2A33">道</text></g>
+        <g transform="translate(900 480)"><circle r="20" fill="#F3ECDA" stroke="#C73E3A" stroke-width="3" /><text y="7" fill="#2B2A33">市</text></g>
+        <g transform="translate(560 580)"><circle r="20" fill="#F3ECDA" stroke="#C73E3A" stroke-width="3" /><text y="7" fill="#2B2A33">手</text></g>
+      </g>
+
+      <!-- sakura near the road -->
+      <use href="#blossom" x="330" y="352" /><use href="#blossom" x="512" y="330" /><use href="#blossom" x="760" y="290" />
+      <use href="#blossom" x="860" y="430" /><use href="#blossom" x="640" y="560" />
+
+      <!-- torii at the spur's end -->
+      <g transform="translate(352 214)" stroke="#C73E3A" stroke-width="3" fill="none">
+        <path d="M-14 -16 L14 -16" /><path d="M-10 -10 L10 -10" /><path d="M-8 -16 L-8 6" /><path d="M8 -16 L8 6" />
+      </g>
+
+      <!-- boats and mist on the sea -->
+      <g transform="translate(1110 640)"><path d="M-22 0 L22 0 L14 8 L-14 8 Z" fill="#2B2A33" /><path d="M0 0 L0 -26 L16 -4 Z" fill="#F3ECDA" stroke="#2B2A33" /></g>
+      <g transform="translate(90 690)"><path d="M-18 0 L18 0 L12 7 L-12 7 Z" fill="#2B2A33" /><path d="M0 0 L0 -22 L13 -3 Z" fill="#F3ECDA" stroke="#2B2A33" /></g>
+      <path d="M40 120 C140 108 220 132 320 118" stroke="#F3ECDA" stroke-width="10" stroke-linecap="round" opacity="0.6" fill="none" />
+      <path d="M900 740 C1000 728 1080 752 1180 736" stroke="#F3ECDA" stroke-width="12" stroke-linecap="round" opacity="0.6" fill="none" />
+
+      <!-- compass rose -->
+      <g transform="translate(90 120)" stroke="#2B2A33" fill="none" stroke-width="1.2">
+        <circle r="34" opacity="0.6" /><circle r="26" opacity="0.4" />
+        <path d="M0 -44 L6 -6 L0 0 L-6 -6 Z" fill="#2B2A33" />
+        <path d="M0 44 L6 6 L0 0 L-6 6 Z" fill="#F3ECDA" />
+        <path d="M-44 0 L-6 -6 L0 0 L-6 6 Z" fill="#F3ECDA" />
+        <path d="M44 0 L6 -6 L0 0 L6 6 Z" fill="#F3ECDA" />
+        <use href="#blossom" x="-3" y="2" />
+      </g>
+
+      <!-- cartouche -->
+      <g transform="translate(1110 70)">
+        <rect x="-26" y="0" width="52" height="210" fill="#F3ECDA" stroke="#C73E3A" stroke-width="2.5" />
+        <rect x="-21" y="5" width="42" height="200" fill="none" stroke="#C73E3A" stroke-width="1" />
+        <text x="0" y="22" writing-mode="tb" font-family="Shippori Mincho, serif" font-size="22" font-weight="700" fill="#2B2A33" letter-spacing="2">腹八分・旅路の図</text>
+      </g>
+
+      <rect width="1200" height="800" filter="url(#paper)" />
+    </svg>
+    <div class="vignette" aria-hidden="true"></div>
+    <span class="petal p1" aria-hidden="true"></span>
+    <span class="petal p2" aria-hidden="true"></span>
+    <span class="petal p3" aria-hidden="true"></span>
+
+    <div class="page">
+      <header class="ribbon glass">
+        <a class="home" href="/">← Both apps</a>
+        <span class="title">腹八分 Harahachi</span>
+        <a class="home" href="/privacy">Privacy</a>
+      </header>
+
+      <main id="main">
+        <section class="hero glass" aria-labelledby="title">
+          <h1 class="kanji" id="title" lang="ja">腹八分<span class="sr-only"> Harahachi</span></h1>
+          <p class="romaji" aria-hidden="true">HARAHACHI</p>
+          <p class="motto">Eat until you are eight-tenths full.</p>
+          <p class="pitch">
+            A photo-first calorie &amp; macro tracker, styled as a journey across an old Japanese map. Snap your dish → a vision model
+            itemizes it around the food → one hanko stamp logs it.
+          </p>
+          <div class="ctas">
+            <a class="hanko" data-cta="VITE_HARAHACHI_APP_URL" data-track="harahachi:open" href="#"><span class="seal" aria-hidden="true">旅</span>Open Harahachi</a>
+            <a class="ghost" data-cta="VITE_HARAHACHI_APK_URL" data-track="harahachi:apk" href="#">Download the Android APK</a>
+          </div>
+        </section>
+
+        <section class="glass" aria-labelledby="road-title">
+          <h2 id="road-title"><span class="jp" lang="ja">道</span>Your day is a road</h2>
+          <p class="sub">
+            Your daily calorie goal is a day's walk along the Tōkaidō road on a dense ukiyo-e map — ink mountains, pine forests, villages,
+            temples, a deep indigo sea. Every meal moves your traveler forward. Workouts extend the road. Landing at the destination station
+            means you ate <em>hara hachi bu</em> — just enough.
+          </p>
+          <svg class="journey" viewBox="0 0 640 70" role="img" aria-labelledby="jb-t">
+            <title id="jb-t">The journey bar: kilocalories eaten fill the road toward the day's destination</title>
+            <path d="M30 40 C140 10 240 64 340 36 C440 10 520 60 610 36" fill="none" stroke="#2B2A33" stroke-width="2" stroke-dasharray="8 4" />
+            <path d="M30 40 C140 10 240 64 340 36 C400 20 440 26 470 34" fill="none" stroke="#D96C8A" stroke-width="5" stroke-linecap="round" />
+            <circle cx="30" cy="40" r="15" fill="#F3ECDA" stroke="#C73E3A" stroke-width="3" />
+            <text x="30" y="46" text-anchor="middle" font-family="Shippori Mincho, serif" font-weight="700" font-size="15" fill="#2B2A33">発</text>
+            <circle cx="610" cy="36" r="15" fill="#F3ECDA" stroke="#C73E3A" stroke-width="3" />
+            <text x="610" y="42" text-anchor="middle" font-family="Shippori Mincho, serif" font-weight="700" font-size="15" fill="#2B2A33">着</text>
+          </svg>
+          <p class="journey-label">An example day: 1,430 / 2,200 kcal · 里 6.5 of 10</p>
+          <p>
+            There is no tab bar. You tap a hanko seal to zoom into a region, swipe down to close it, and swipe the header to travel to the next
+            station. Every panel is glass with a frost you can tune yourself.
+          </p>
+        </section>
+
+        <section class="glass" aria-labelledby="stations-title">
+          <h2 id="stations-title"><span class="jp" lang="ja">宿</span>The stations</h2>
+          <p class="sub">Six stops on the road, and a guide who walks with you.</p>
+          <div class="stations">
+            <div class="station"><span class="seal" aria-hidden="true">本</span><div><h3>Honjin <small lang="ja">本陣</small></h3><p>Today's journey bar, macro paths, water cups, streak chip, and suggestions from meals you actually eat.</p></div></div>
+            <div class="station"><span class="seal" aria-hidden="true">茶</span><div><h3>Chaya <small lang="ja">茶屋</small></h3><p>Camera dish analysis, a barcode scanner, one-tap quick-log and manual entry.</p></div></div>
+            <div class="station"><span class="seal" aria-hidden="true">暦</span><div><h3>Koyomi <small lang="ja">暦</small></h3><p>A calendar heat-map, your weight trend, weekly insights, and the goshuin stamp book.</p></div></div>
+            <div class="station"><span class="seal" aria-hidden="true">道</span><div><h3>Dōjō <small lang="ja">道場</small></h3><p>A workout timer with MET-calculated calories; burned kcal extend the road.</p></div></div>
+            <div class="station"><span class="seal" aria-hidden="true">市</span><div><h3>Ichiba <small lang="ja">市場</small></h3><p>Merch, and deep links to healthy delivery.</p></div></div>
+            <div class="station"><span class="seal" aria-hidden="true">手</span><div><h3>Tegata <small lang="ja">手形</small></h3><p>Profile and targets, body-fat silhouettes or a photo estimate, goal pace with an arrival date, reminders, CSV export.</p></div></div>
+            <div class="station annai"><span class="seal" aria-hidden="true">⛩</span><div><h3>Annai <small lang="ja">案内人</small></h3><p>The chat guide. “I ate 2 idlis and sambar” logs it; “what should I eat tonight?” proposes — you stamp to confirm.</p></div></div>
+          </div>
+        </section>
+
+        <section class="glass" aria-labelledby="features-title">
+          <h2 id="features-title"><span class="jp" lang="ja">茶</span>What it does</h2>
+          <p class="sub">Photo-first, but never only a photo.</p>
+          <ul class="features">
+            <li><strong>Camera analysis that surrounds the food</strong>One glass chip per component — dal · rice · roti ×2 · curd — pinned beside its spot with a leader line, portions cycling ×0.5–×2, and one clarifying question when it matters (“ghee on the rotis?”).</li>
+            <li><strong>Barcode scanning</strong>Packaged food via OpenFoodFacts, proxied and cached by the server.</li>
+            <li><strong>The feedback loop</strong>Weight trend, goal pace turned into a calorie target (Katch-McArdle with body fat), an arrival date, streaks with red temple stamps and gold milestones, weekly insights in the guide's voice.</li>
+            <li><strong>Reminders</strong>A 6 pm goal nudge suggesting <em>your</em> regular meals, 3 pm water, a 10 pm recap.</li>
+            <li><strong>Offline-first</strong>Logs queue on the phone and sync when the server returns; every failure is a popup with retry, never a stuck screen.</li>
+            <li><strong>Accounts</strong>Username + PIN, separate data per user, logout and switch.</li>
+          </ul>
+          <div class="chips" aria-label="Macro colours">
+            <span class="chip p">Protein</span><span class="chip c">Carbs</span><span class="chip f">Fat</span>
+          </div>
+        </section>
+
+        <section class="glass" aria-labelledby="sec-title">
+          <h2 id="sec-title"><span class="jp" lang="ja">関</span>Guarded like a checkpoint</h2>
+          <p>
+            Devices get their own keys from single-use QR pairing tokens (stored hashed). PIN accounts lock after repeated failures, every
+            device is rate-limited, admin rights are enforced by the server, and the AI backends are never exposed to the phone.
+          </p>
+          <div class="ctas">
+            <a class="hanko" data-cta="VITE_HARAHACHI_APP_URL" data-track="harahachi:open" href="#"><span class="seal" aria-hidden="true">旅</span>Start the journey</a>
+            <a class="ghost" data-cta="VITE_HARAHACHI_APK_URL" data-track="harahachi:apk" href="#">Android APK</a>
+          </div>
+        </section>
+      </main>
+
+      <footer class="foot glass">
+        <span lang="ja">腹八分目 · <span lang="en">eight-tenths is enough</span></span>
+        <span><a href="/">Both apps</a> · <a href="/busboard">Bus Board</a> · <a href="/privacy">Privacy</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+# Pings the console's collector every 15 minutes.
+#
+# DISABLED until you configure it: the job only runs when the repository
+# variable BANSHO_COLLECT_ENABLED is exactly "true". Set up (see DEPLOY.md):
+#   Settings -> Secrets and variables -> Actions
+#     Secrets:   BANSHO_CONSOLE_URL  e.g. https://bansho-console.vercel.app
+#                BANSHO_CRON_SECRET  the same value as CRON_SECRET on Vercel
+#     Variables: BANSHO_COLLECT_ENABLED = true
+# Use either this workflow OR cron-job.org - not both (both is harmless, the
+# collector is idempotent per 5-minute bucket, just redundant).
+name: collect
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: bansho-collect
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    if: ${{ vars.BANSHO_COLLECT_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Call /api/cron/collect
+        env:
+          CONSOLE_URL: ${{ secrets.BANSHO_CONSOLE_URL }}
+          CRON_SECRET: ${{ secrets.BANSHO_CRON_SECRET }}
+        run: |
+          set -eu
+          if [ -z "${CONSOLE_URL}" ] || [ -z "${CRON_SECRET}" ]; then
+            echo "BANSHO_CONSOLE_URL / BANSHO_CRON_SECRET secrets are not set" >&2
+            exit 1
+          fi
+          code=$(curl -sS -o /tmp/out.json -w '%{http_code}' --max-time 90 \
+            -H "Authorization: Bearer ${CRON_SECRET}" \
+            "${CONSOLE_URL%/}/api/cron/collect")
+          echo "HTTP ${code}"
+          cat /tmp/out.json; echo
+          [ "${code}" = "200" ]

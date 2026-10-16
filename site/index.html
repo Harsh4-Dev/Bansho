@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Harahachi &amp; Bus Board</title>
+    <meta name="description" content="Two small apps: Harahachi, a photo-first calorie tracker styled as a journey across an old Japanese map, and Bus Board, a live public-bus board for the Trichy ↔ Thanjavur corridor." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script type="module" src="/src/home.ts"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="wrap">
+      <header class="site-head">
+        <a href="/">Harahachi &amp; Bus Board</a>
+        <nav aria-label="Pages">
+          <a href="/harahachi">Harahachi</a>
+          <a href="/busboard">Bus Board</a>
+          <a href="/privacy">Privacy</a>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero">
+          <h1>Two small apps, each answering <span class="accent">one question well</span>.</h1>
+          <p>
+            How much have I eaten today, and how far is it to just enough? When is the next bus to Thanjavur, and where is it right
+            now?
+          </p>
+        </section>
+
+        <section class="apps" aria-label="The apps">
+          <article class="app hh" aria-labelledby="hh-title">
+            <div class="kanji" aria-hidden="true">腹八分</div>
+            <h2 id="hh-title">HARAHACHI</h2>
+            <p class="lead">Eat until you are eight-tenths full.</p>
+            <p>
+              A photo-first calorie &amp; macro tracker, styled as a journey across an old Japanese map. Snap your dish, a vision model
+              itemizes it around the food, and one hanko stamp logs it.
+            </p>
+            <ul>
+              <li>Your daily goal is a day's walk along the Tōkaidō road</li>
+              <li>Camera analysis, barcode scanning, one-tap quick-log</li>
+              <li>Annai, the chat guide: “I ate 2 idlis and sambar” logs it</li>
+            </ul>
+            <div class="actions">
+              <a class="btn" data-cta="VITE_HARAHACHI_APP_URL" data-track="harahachi:open" href="#">Open Harahachi</a>
+              <a class="btn ghost" data-cta="VITE_HARAHACHI_APK_URL" data-track="harahachi:apk" href="#">Android APK</a>
+              <a class="more" href="/harahachi">Learn more →</a>
+            </div>
+          </article>
+
+          <article class="app bb" aria-labelledby="bb-title">
+            <pre aria-hidden="true">   ______________________
+  |  ..................  |
+  |  ..................  |
+  |__....................|
+  [] |    |        |  [] |
+  ---'----'--------'-----'
+     (O)              (O)</pre>
+            <h2 id="bb-title">BUSBOARD</h2>
+            <p class="dim">trichy &lt;-&gt; thanjavur · tnstc corridor</p>
+            <p><span class="prompt">[/&gt;</span>I'm at SASTRA, I want to go to Thanjavur — when is the next bus, and where is it now?</p>
+            <ul>
+              <li>next bus ~4 min, then ~11, ~19</li>
+              <li>live, recent and scheduled buses, never mixed up</li>
+              <li>works on day one, with zero contributors</li>
+            </ul>
+            <div class="actions">
+              <a class="btn" data-cta="VITE_BUSBOARD_APP_URL" data-track="busboard:open" href="#">open the board</a>
+              <a class="btn ghost" data-cta="VITE_BUSBOARD_APK_URL" data-track="busboard:apk" href="#">android apk</a>
+              <a class="more" href="/busboard">learn more -&gt;</a>
+            </div>
+          </article>
+        </section>
+      </main>
+
+      <footer class="site-foot">
+        <span>Made by Harshavardhan.</span>
+        <span>No cookies, no third-party scripts. <a href="/privacy">Privacy</a></span>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="theme-color" content="#000000" />
+    <title>busboard — trichy &lt;-&gt; thanjavur</title>
+    <meta name="description" content="A live public-bus board for the Trichy ↔ Thanjavur corridor: when is the next bus, and where is it right now?" />
+    <link rel="icon" href="/busboard-icon.svg" type="image/svg+xml" />
+    <script type="module" src="/src/busboard.ts"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">skip to content</a>
+    <div class="t-app">
+      <header class="t-head">
+        <a class="t-head-name" href="/">&lt;- both apps</a>
+        <button class="t-skin" id="skin" type="button" aria-label="Toggle day skin">[day]</button>
+      </header>
+
+      <pre class="t-texture" aria-hidden="true">  .,:+=c/x#x/c=+:,.  .,:+=c/x#x/c=+:,.  .,:+=c/x#x/c=+:,.
+ .,:+=c/x#  #x/c=+:,..,:+=c/x#  #x/c=+:,..,:+=c/x#  #x/c=+
+,:+=c/x#      #x/c=+:,:+=c/x#      #x/c=+:,:+=c/x#      #</pre>
+
+      <pre class="t-logo" aria-hidden="true">   ______________________
+  |  ..................  |
+  |  ..................  |
+  |__....................|
+  [] |    |        |  [] |
+  ---'----'--------'-----'
+     (O)              (O)</pre>
+
+      <main id="main">
+        <h1 class="t-title">BUSBOARD</h1>
+        <p class="t-dim t-sub">trichy &lt;-&gt; thanjavur &middot; tnstc corridor</p>
+
+        <p class="t-line"><span class="t-prompt">$</span>boardctl ask "i'm at sastra, i want to go to thanjavur"</p>
+        <p class="t-line"><span class="t-mark">ok</span>when is the next bus, and where is it right now?<span class="t-cursor" aria-hidden="true"></span></p>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">next bus</span><span class="t-section-note">example</span></h2>
+          <p class="t-wait" aria-label="about 4 minutes">~4 min</p>
+          <p class="t-line t-dim">o scheduled · a range, not a promise</p>
+          <div class="t-then-row t-line"><span>then</span><span>~11 &middot; ~19</span></div>
+        </div>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">why headway, not timetables</span></h2>
+          <p class="t-line t-dim">
+TNSTC publishes no realtime feed, no GTFS and no itemised departure times for the Trichy-&gt;Thanjavur direction. It is a 24-hour corridor running every 10-15 minutes, so the board says "next bus ~4 min, then ~11, ~19" rather than naming services it cannot know.</p>
+        </div>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">three tiers, never collapsed</span></h2>
+          <dl class="t-kv">
+            <dt><span class="t-tier-live">@</span> live</dt>
+            <dd>a contributor is aboard and the sighting is fresh</dd>
+            <dt>* recent</dt>
+            <dd>last ping 1-15 min old - dead-reckoned, with its uncertainty shown</dd>
+            <dt>o sched</dt>
+            <dd>nobody has seen this bus - from the schedule alone</dd>
+          </dl>
+          <p class="t-line t-dim">The word and the glyph carry the meaning, not colour, so the board reads the same to anyone. It never presents a guess as an observation.</p>
+        </div>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">the corridor</span><span class="t-section-note">illustrative</span></h2>
+          <pre class="t-plot" aria-label="A sketch of the road from Trichy to Thanjavur with SASTRA and Vallam on it">trichy                                         thanjavur
+  o------o------o------o------o------@------o------o
+                                   sastra vallam
+  @ live   * recent   o scheduled</pre>
+          <p class="t-line t-dim">White on black because a rider is reading one number at arm's length in Tamil Nadu sun. The map is a text plot of the route's own geometry: no tiles, no keys, no WebGL.</p>
+        </div>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">share your ride</span></h2>
+          <ul class="t-list">
+            <li><span>Riders can share location while aboard; it is what turns a scheduled bus into a live one.</span></li>
+            <li><span>Every trace passes validation gates biased toward rejection - a bench, a walk or a car does not look like a bus.</span></li>
+            <li><span>Trust is earned slowly and lost five times faster. A solo ride raises nobody's standing.</span></li>
+            <li><span>It works on day one with zero contributors, and gets better, never worse, as contributions arrive.</span></li>
+          </ul>
+        </div>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">privacy</span></h2>
+          <ul class="t-list">
+            <li><span>The first and last 200 m of every shared trace are discarded before storage - before any other code sees it.</span></li>
+            <li><span>Your contributor id is a random id kept in the app's own storage, and can be discarded. Ride session ids rotate per ride.</span></li>
+            <li><span>The app has no analytics, no crash reporting and no third-party SDK.</span></li>
+          </ul>
+        </div>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">also on the board</span></h2>
+          <ul class="t-list">
+            <li><span>SASTRA's own campus buses, as a separate layer from their published stop-level timetable (the board says how old that timetable is).</span></li>
+            <li><span class="t-cmd">A real command line: <b>to thanjavur</b>, <b>share</b>, <b>stops</b>, <b>refresh</b>.</span></li>
+            <li><span>An Android app that keeps reporting with the screen off while you share a ride.</span></li>
+          </ul>
+        </div>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">honest status</span></h2>
+          <p class="t-line t-dim">The corridor seed is provisional: stop positions are still unverified and the route shape is approximate. The data says so itself, and it improves as stops are surveyed.</p>
+        </div>
+
+        <div class="t-block">
+          <h2 class="t-section"><span class="t-prompt">[/&gt;</span><span class="t-section-label">get it</span></h2>
+          <a class="t-button" data-cta="VITE_BUSBOARD_APP_URL" data-track="busboard:open" href="#">[ open the board ]</a>
+          <a class="t-button" data-cta="VITE_BUSBOARD_APK_URL" data-track="busboard:apk" href="#">[ download android apk ]</a>
+          <p class="t-line t-dim">The server may be asleep; the first load can take up to a minute.</p>
+        </div>
+
+        <p class="t-line t-dim t-block">map data &copy; openstreetmap contributors, odbl &middot; <a href="/privacy">privacy</a> &middot; <a href="/harahachi">harahachi</a></p>
+      </main>
+    </div>
+  </body>
+</html>

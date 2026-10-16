@@ -1,0 +1,20 @@
+{
+  "name": "bansho-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Public landing pages for Harahachi and Bus Board. Static, no cookies, no third-party scripts.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@fontsource/shippori-mincho": "5.3.0",
+    "@fontsource/zen-maru-gothic": "5.3.1",
+    "@types/node": "22.20.5",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  }
+}

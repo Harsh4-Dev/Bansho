@@ -1,0 +1,25 @@
+{
+  "name": "bansho-console",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Bansho - private ops console for Harahachi and Bus Board (owner only).",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc -b --noEmit",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@simplewebauthn/browser": "14.0.0",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.7",
+    "@vitejs/plugin-react": "5.1.4",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  }
+}

@@ -1,0 +1,402 @@
+/* Harahachi - "Old Sakura Map". Palette, glass and type from calorietracker/DESIGN.md. */
+:root {
+  --washi: #f3ecda;
+  --washi-deep: #e9dfc6;
+  --sumi: #2b2a33;
+  --sumi-soft: #55525e;
+  --sakura: #e8a7b8;
+  --sakura-deep: #d96c8a;
+  --shu: #c73e3a;
+  --matcha: #7ba05b;
+  --ai: #2d4a63;
+  --kin: #c9a227;
+  --glass-alpha: 0.62;
+  --glass-blur: 14px;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--washi-deep);
+  color: var(--sumi);
+}
+
+body {
+  overflow-x: clip;
+  font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.mincho {
+  font-family: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+}
+
+a {
+  color: var(--ai);
+}
+
+:focus-visible {
+  outline: 2px solid var(--shu);
+  outline-offset: 3px;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.skip:focus {
+  left: 12px;
+  top: 12px;
+  z-index: 10;
+  background: var(--washi);
+  padding: 6px 10px;
+}
+
+/* ---- the map ---------------------------------------------------------------- */
+
+.map {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(110, 80, 40, 0.28) 100%);
+}
+
+.petal {
+  position: fixed;
+  top: -20px;
+  width: 12px;
+  height: 9px;
+  border-radius: 12px 0 12px 0;
+  background: var(--sakura);
+  opacity: 0.85;
+  z-index: 1;
+  pointer-events: none;
+  animation: drift 26s linear infinite;
+}
+
+.petal.p1 { left: 12%; animation-duration: 24s; }
+.petal.p2 { left: 48%; animation-duration: 29s; animation-delay: -9s; background: var(--sakura-deep); opacity: 0.6; }
+.petal.p3 { left: 81%; animation-duration: 22s; animation-delay: -15s; }
+
+@keyframes drift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(-60px, 55vh) rotate(200deg); }
+  100% { transform: translate(30px, 110vh) rotate(420deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .petal { display: none; }
+  * { transition: none !important; }
+}
+
+/* ---- glass ---------------------------------------------------------------------- */
+
+.glass {
+  background: rgba(243, 236, 218, var(--glass-alpha));
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.25);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.25);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(43, 42, 51, 0.14);
+}
+
+.page {
+  position: relative;
+  z-index: 2;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 16px 16px 48px;
+}
+
+.ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 18px;
+  margin-bottom: 28px;
+}
+
+.ribbon a {
+  color: var(--sumi);
+  text-decoration: none;
+}
+
+.ribbon .home {
+  font-size: 15px;
+}
+
+.ribbon .title {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.hero {
+  padding: 40px 32px 34px;
+  text-align: center;
+}
+
+.hero .kanji {
+  font-size: clamp(64px, 14vw, 120px);
+  font-weight: 700;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: 0.05em;
+}
+
+.hero .romaji {
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  letter-spacing: 0.55em;
+  margin: 18px 0 4px;
+  font-size: 18px;
+  padding-left: 0.55em;
+}
+
+.hero .motto {
+  font-style: italic;
+  color: var(--sumi-soft);
+  margin: 0 0 18px;
+}
+
+.hero .pitch {
+  max-width: 620px;
+  margin: 0 auto 26px;
+  font-size: 19px;
+}
+
+.ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hanko {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--shu);
+  color: var(--washi);
+  text-decoration: none;
+  padding: 12px 22px;
+  border-radius: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 0 #8f2a27;
+  transition: transform 200ms;
+}
+
+.hanko:hover {
+  transform: translateY(-1px) rotate(-1deg);
+}
+
+.hanko .seal {
+  font-family: 'Shippori Mincho', serif;
+  border: 2px solid var(--washi);
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  font-size: 18px;
+}
+
+.ghost {
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 14px;
+  border: 1.5px solid var(--sumi);
+  color: var(--sumi);
+  text-decoration: none;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+section.glass {
+  margin-top: 22px;
+  padding: 28px 30px;
+}
+
+section h2 {
+  font-size: 26px;
+  margin: 0 0 6px;
+}
+
+section h2 .jp {
+  color: var(--shu);
+  margin-right: 10px;
+}
+
+.sub {
+  color: var(--sumi-soft);
+  margin: 0 0 18px;
+}
+
+.journey {
+  margin: 18px 0 6px;
+}
+
+.journey-label {
+  font-family: 'Shippori Mincho', serif;
+  font-feature-settings: 'tnum';
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  margin-top: 6px;
+}
+
+.stations {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.station {
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.station .seal {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2.5px solid var(--shu);
+  display: grid;
+  place-items: center;
+  font-family: 'Shippori Mincho', serif;
+  font-weight: 700;
+  font-size: 22px;
+  background: var(--washi);
+}
+
+.station.annai .seal {
+  background: var(--shu);
+  color: var(--washi);
+}
+
+.station h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.station h3 small {
+  font-size: 13px;
+  color: var(--sumi-soft);
+  margin-left: 6px;
+}
+
+.station p {
+  margin: 4px 0 0;
+  font-size: 15px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px 28px;
+  padding: 0;
+  list-style: none;
+  margin: 0;
+}
+
+.features li {
+  padding-left: 22px;
+  position: relative;
+}
+
+.features li::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 0.6em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--sakura-deep);
+}
+
+.features strong {
+  display: block;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.chip {
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.chip.p { background: var(--matcha); }
+.chip.c { background: var(--ai); }
+.chip.f { background: var(--kin); color: var(--sumi); }
+
+.foot {
+  margin-top: 28px;
+  padding: 16px 22px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 15px;
+}
+
+.foot a {
+  color: var(--sumi);
+}
+
+@media (max-width: 640px) {
+  section.glass {
+    padding: 22px 18px;
+  }
+  .hero {
+    padding: 30px 16px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

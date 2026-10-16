@@ -1,0 +1,139 @@
+/* Shared reset + tokens for the neutral pages (home, privacy). */
+:root {
+  --paper: #f6f2e8;
+  --paper-2: #ece6d6;
+  --ink: #23222a;
+  --ink-2: #4f4c57;
+  --ink-3: #6b6873;
+  --rule: #d9d2c0;
+  --shu: #c73e3a;
+  --sakura: #e8a7b8;
+  --link: #2d4a63;
+  --term-bg: #000;
+  --term-fg: #fff;
+  --term-dim: #8a8a8a;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #16151a;
+    --paper-2: #1f1d24;
+    --ink: #eeeae0;
+    --ink-2: #c9c4b8;
+    --ink-3: #a29d93;
+    --rule: #34313b;
+    --shu: #e0605b;
+    --link: #93b7d8;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+}
+
+:focus-visible {
+  outline: 2px solid var(--shu);
+  outline-offset: 3px;
+}
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.skip:focus {
+  left: 12px;
+  top: 12px;
+  background: var(--paper);
+  padding: 6px 10px;
+  z-index: 10;
+}
+
+.site-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+}
+
+.site-head a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.site-head nav {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+
+@media (max-width: 560px) {
+  .site-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+.site-head nav a {
+  font-weight: 500;
+  color: var(--ink-2);
+}
+
+.site-head nav a:hover {
+  color: var(--ink);
+}
+
+.site-foot {
+  border-top: 1px solid var(--rule);
+  margin-top: 64px;
+  padding: 24px 0 40px;
+  color: var(--ink-3);
+  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  justify-content: space-between;
+}
+
+.site-foot a {
+  color: var(--ink-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,12 @@
+# Python dependencies for the console's Vercel function (api/index.py).
+# Exact pins; Vercel installs this file from the project root (console/).
+fastapi==0.143.0
+starlette==1.7.0
+pydantic==2.14.1
+webauthn==3.0.1
+cbor2==6.1.5
+cryptography==50.0.2
+pyOpenSSL==26.4.0
+httpx==0.28.1
+psycopg[binary]==3.3.6
+tzdata==2026.5

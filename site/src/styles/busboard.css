@@ -1,0 +1,285 @@
+/*
+ * Bus Board's own look (maps/apps/web/src/styles.css): a terminal.
+ * White on black, one monospace family, no colour, no border, no shadow, no
+ * rounded corner. Every division is made of characters.
+ */
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --dim: #8a8a8a;
+  --faint: #767676;
+  --ghost: #1e1e1e;
+  --cell: 15px;
+  --leading: 1.28;
+  color-scheme: dark;
+}
+
+:root[data-skin='day'] {
+  --bg: #fff;
+  --fg: #000;
+  --dim: #666;
+  --faint: #767676;
+  --ghost: #e8e8e8;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+body {
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', 'Roboto Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  font-size: var(--cell);
+  line-height: var(--leading);
+  -webkit-font-smoothing: antialiased;
+  font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
+}
+
+a {
+  color: var(--fg);
+}
+
+.t-app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 16px 96px;
+}
+
+.t-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1ch;
+  padding-top: 14px;
+}
+
+.t-head-name {
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+.t-skin {
+  background: transparent;
+  border: 0;
+  font: inherit;
+  color: var(--dim);
+  cursor: pointer;
+  padding: 0;
+}
+
+.t-skin:hover {
+  color: var(--fg);
+}
+
+.t-line {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.t-dim {
+  color: var(--dim);
+}
+
+.t-prompt {
+  color: var(--faint);
+  margin-right: 0.5ch;
+}
+
+.t-mark {
+  display: inline-block;
+  min-width: 3ch;
+  color: var(--dim);
+}
+
+.t-logo,
+.t-texture,
+.t-plot {
+  margin: 0;
+  font: inherit;
+  white-space: pre;
+  overflow: hidden;
+  user-select: none;
+}
+
+.t-logo {
+  color: var(--dim);
+  line-height: 1.05;
+  margin: 18px 0 14px;
+}
+
+.t-texture {
+  color: var(--ghost);
+  line-height: 1;
+  font-size: 0.8em;
+}
+
+.t-plot {
+  font-size: 0.75em;
+  line-height: 1.1;
+}
+
+.t-title {
+  font-size: clamp(30px, 11vw, 52px);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.t-sub {
+  margin: 2px 0 22px;
+}
+
+.t-block {
+  margin: 26px 0 0;
+}
+
+.t-section {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5ch;
+  margin: 0 0 6px;
+  font-size: inherit;
+  font-weight: 400;
+}
+
+.t-section-label {
+  text-transform: lowercase;
+}
+
+.t-section-note {
+  color: var(--faint);
+  margin-left: auto;
+  font-size: 0.85em;
+}
+
+.t-rule {
+  color: var(--ghost);
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.t-wait {
+  font-size: clamp(44px, 17vw, 84px);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin: 10px 0 2px;
+  white-space: nowrap;
+}
+
+.t-then-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 2ch;
+}
+
+.t-tier-live {
+  animation: t-blink 1.06s steps(1) infinite;
+}
+
+.t-cursor {
+  display: inline-block;
+  width: 0.62ch;
+  height: 1em;
+  margin-left: 0.4ch;
+  background: var(--fg);
+  vertical-align: text-bottom;
+  animation: t-blink 1.06s steps(1) infinite;
+}
+
+@keyframes t-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.t-button {
+  display: inline-block;
+  margin: 8px 2ch 0 0;
+  padding: 2px 0;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.t-button:hover,
+.t-button:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 2px;
+}
+
+.t-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.t-list li {
+  display: grid;
+  grid-template-columns: 3ch 1fr;
+}
+
+.t-list li::before {
+  content: '-';
+  color: var(--faint);
+}
+
+.t-kv {
+  display: grid;
+  grid-template-columns: 6ch 1fr;
+  gap: 0 1ch;
+  margin: 0;
+}
+
+.t-kv dt {
+  color: var(--fg);
+}
+
+.t-kv dd {
+  margin: 0 0 6px;
+  color: var(--dim);
+}
+
+.t-cmd b {
+  font-weight: 400;
+  color: var(--fg);
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+}
+
+.skip:focus {
+  left: 8px;
+  top: 8px;
+  background: var(--bg);
+  outline: 1px solid var(--fg);
+  padding: 4px 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-cursor,
+  .t-tier-live {
+    animation: none;
+  }
+}

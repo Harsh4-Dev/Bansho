@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Privacy — Harahachi &amp; Bus Board</title>
+    <meta name="description" content="What this landing site measures, what it does not, and how to opt out." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <script type="module" src="/src/privacy.ts"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="wrap">
+      <header class="site-head">
+        <a href="/">Harahachi &amp; Bus Board</a>
+        <nav aria-label="Pages">
+          <a href="/harahachi">Harahachi</a>
+          <a href="/busboard">Bus Board</a>
+          <a href="/privacy" aria-current="page">Privacy</a>
+        </nav>
+      </header>
+
+      <main id="main" class="prose">
+        <h1>Privacy</h1>
+        <p class="updated">This page covers this landing site. Each app's own notes are at the end.</p>
+
+        <h2>The short version</h2>
+        <ul>
+          <li>No cookies. No third-party scripts, fonts, pixels or embeds — everything is served from this site.</li>
+          <li>One tiny, first-party count per page view and per button click, and nothing at all if your browser sends
+            <em>Do Not Track</em> or <em>Global Privacy Control</em>.</li>
+          <li>No IP addresses and no user-agent strings are stored. Nothing is sold or shared.</li>
+        </ul>
+
+        <h2>What a count contains</h2>
+        <p>When you open a page or click an “open app” / “download” button, your browser sends this, and only this:</p>
+        <table>
+          <thead>
+            <tr><th scope="col">Field</th><th scope="col">Example</th><th scope="col">Why</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>type</code></td><td>pageview or click</td><td>to count visits and button clicks</td></tr>
+            <tr><td><code>path</code></td><td>/busboard</td><td>which page</td></tr>
+            <tr><td><code>ref_host</code></td><td>www.google.com</td><td>the site that linked here (host name only, never the full address)</td></tr>
+            <tr><td><code>target</code></td><td>busboard:apk</td><td>which button, for clicks only</td></tr>
+          </tbody>
+        </table>
+        <p>
+          On receipt the server adds: the time; your country as reported by the hosting provider (two letters, e.g. IN); a device class
+          (mobile, tablet or desktop) and a likely-bot flag, both derived from the user-agent string, which is then thrown away; and a
+          visitor hash used only to count unique visitors per day.
+        </p>
+
+        <h2>The visitor hash</h2>
+        <p>
+          It is computed from your IP address and browser string with a random secret that changes every day; the old secrets are
+          deleted. It therefore cannot be reversed to an IP address, and the same person produces unrelated hashes on different days —
+          no profile across days is possible. The same daily-salted hash is used for rate-limiting abuse.
+        </p>
+
+        <h2>Opting out</h2>
+        <p>
+          Turn on <em>Do Not Track</em> or <em>Global Privacy Control</em> in your browser (or use an extension that does), and this
+          site sends nothing. Blocking scripts works too: the pages read fine without them.
+        </p>
+
+        <h2>Storage on your device</h2>
+        <p>
+          The Bus Board page remembers whether you chose its “day” skin in your browser's local storage. That value never leaves your
+          device. Nothing else is stored.
+        </p>
+
+        <h2>Retention</h2>
+        <p>Counts are kept for about 13 months to see trends, then deleted.</p>
+
+        <h2>The apps themselves</h2>
+        <p>
+          <strong>Harahachi</strong> — accounts are a username and PIN; each phone is paired with a single-use QR token and gets its own
+          key; your meals and profile belong to your account; AI analysis runs on the server and the AI backends are never exposed to the
+          phone.
+        </p>
+        <p>
+          <strong>Bus Board</strong> — sharing your ride is optional. The first and last 200 m of every shared trace are discarded before
+          storage; your contributor id is a random id held by the app that you can discard; the app has no analytics, crash reporting or
+          third-party SDK.
+        </p>
+      </main>
+
+      <footer class="site-foot">
+        <span>Made by Harshavardhan.</span>
+        <span><a href="/">Both apps</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
